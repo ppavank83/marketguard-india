@@ -216,3 +216,39 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Data
+data/raw/
+data/interim/
+data/processed/
+*.csv
+*.parquet
+*.feather
+
+# Models
+models/*.pkl
+models/*.joblib
+models/*.txt
+models/*.bin
+
+# Reports generated locally
+reports/figures/
+reports/tables/
+reports/model_reports/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
