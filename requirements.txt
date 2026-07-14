@@ -4,3 +4,4 @@ yfinance
 tqdm
 ipywidgets
 ipykernel
+scipy
