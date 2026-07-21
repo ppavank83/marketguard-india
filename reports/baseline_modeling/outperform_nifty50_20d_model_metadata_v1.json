@@ -1,0 +1,35 @@
+{
+    "model_name": "best_random_forest",
+    "model_type": "RandomForestClassifier",
+    "model_version": "v1",
+    "model_path": "E:\\Projects\\marketguard-india\\models\\best_random_forest_outperform_nifty50_20d_v1.joblib",
+    "target": "target_outperform_nifty50_20d",
+    "target_meaning": "1 means the stock outperformed Nifty 50 over the next 20 trading days.",
+    "intended_use": "Rank stocks by estimated probability of outperforming Nifty 50. Not intended as a hard buy or sell classifier.",
+    "feature_count": 79,
+    "train_rows": 253538,
+    "valid_rows": 21780,
+    "test_rows": 32135,
+    "train_positive_rate": 0.5129250842082843,
+    "valid_positive_rate": 0.5045454545454545,
+    "test_positive_rate": 0.5172864477983508,
+    "default_threshold": 0.5,
+    "selected_threshold": 0.53,
+    "model_parameters": {
+        "n_estimators": 300,
+        "min_samples_split": 200,
+        "min_samples_leaf": 400,
+        "max_features": 0.7,
+        "max_depth": 10,
+        "class_weight": null,
+        "bootstrap": true,
+        "random_state": 42
+    },
+    "performance": {
+        "validation_roc_auc": 0.540441,
+        "validation_average_precision": 0.53994,
+        "test_roc_auc": 0.517855,
+        "test_average_precision": 0.530662
+    },
+    "created_at": "2026-07-21 22:20:08"
+}

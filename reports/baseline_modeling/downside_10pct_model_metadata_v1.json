@@ -1,0 +1,25 @@
+{
+    "model_name": "random_forest_downside_balanced",
+    "model_type": "RandomForestClassifier",
+    "target": "target_big_downside_10pct_20d",
+    "target_meaning": "1 means the stock fell at least 10% at any point in the next 20 trading days.",
+    "feature_count": 79,
+    "train_rows": 253538,
+    "valid_rows": 21780,
+    "test_rows": 32135,
+    "train_positive_rate": 0.14759917645481152,
+    "valid_positive_rate": 0.12543617998163453,
+    "test_positive_rate": 0.11196514703594213,
+    "selected_thresholds": {
+        "selective_high_confidence_alert": 0.51,
+        "defensive_risk_monitoring": 0.47,
+        "middle_ground_default": 0.5
+    },
+    "recommended_risk_bands": {
+        "low_risk": "probability < 0.40",
+        "watch_risk": "0.40 <= probability < 0.47",
+        "high_risk": "0.47 <= probability < 0.51",
+        "very_high_risk": "probability >= 0.51"
+    },
+    "created_at": "2026-07-21 22:20:57"
+}
