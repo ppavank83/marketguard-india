@@ -1,0 +1,47 @@
+{
+    "backtest_version": "v1",
+    "generated_at": "2026-07-22 03:14:49",
+    "full_backtest_period": {
+        "start": "2024-01-02",
+        "end": "2026-06-01",
+        "rebalance_frequency": "monthly",
+        "rebalance_dates": 30,
+        "stocks_per_rebalance": 90,
+        "observations": 2700
+    },
+    "clean_test_period": {
+        "start": "2025-01-01",
+        "months": 18
+    },
+    "final_interpretation": {
+        "opportunity_model": "Useful as a relative ranking signal, but no statistically reliable return-alpha spread was established.",
+        "downside_model": "Validated as a relative risk-ranking model with meaningful separation in drawdowns and downside-event rates.",
+        "combined_classification": "Validated primarily for risk screening, not as a proven return-generating strategy."
+    },
+    "recommended_design": {
+        "combined_classification_risk_input": "Cross-sectional downside rank rather than fixed probability bands.",
+        "fixed_probability_bands": "Retain as descriptive alerts, but do not use as the primary combined-classification rule."
+    },
+    "rank_based_attractive_minus_unfavourable_2025plus": {
+        "future_return_spread_pct": -0.02,
+        "future_return_ci_95_pct": [
+            -2.25,
+            1.99
+        ],
+        "worst_path_return_spread_pct": 1.84,
+        "worst_path_return_ci_95_pct": [
+            0.73,
+            3.14
+        ],
+        "downside_5pct_rate_spread_pct": -13.7,
+        "downside_5pct_rate_ci_95_pct": [
+            -24.59,
+            -3.98
+        ],
+        "downside_10pct_rate_spread_pct": -9.6,
+        "downside_10pct_rate_ci_95_pct": [
+            -19.7,
+            -1.99
+        ]
+    }
+}
