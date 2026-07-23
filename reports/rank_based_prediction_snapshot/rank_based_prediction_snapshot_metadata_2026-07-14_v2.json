@@ -1,0 +1,220 @@
+{
+  "notebook": "09_rank_based_prediction_snapshot.ipynb",
+  "notebook_version": "09",
+  "snapshot_version": "v2",
+  "snapshot_date": "2026-07-14",
+  "generated_at_utc": "2026-07-23T23:11:47.649058+00:00",
+  "classification_method": "rank_based_relative_downside_risk",
+  "version_lineage": {
+    "v1_notebook": "07_latest_prediction_snapshot.ipynb",
+    "validation_notebook": "08_historical_signal_backtest.ipynb",
+    "v2_notebook": "09_rank_based_prediction_snapshot.ipynb",
+    "v1_primary_risk_input": "Fixed downside-probability bands",
+    "v2_primary_risk_input": "Cross-sectional downside-risk rank"
+  },
+  "input_files": {
+    "feature_dataset": "data/interim/targets/stock_features_with_targets_v1.parquet",
+    "outperform_model": "models/best_random_forest_outperform_nifty50_20d_v1.joblib",
+    "downside_model": "models/random_forest_downside_10pct_20d_v1.joblib"
+  },
+  "model_configuration": {
+    "feature_count": 79,
+    "models_use_identical_feature_order": true,
+    "outperform_target": "target_outperform_nifty50_20d",
+    "downside_target": "target_big_downside_10pct_20d",
+    "probability_interpretation": "Raw model scores are primarily used for ranking. They should not be interpreted as fully calibrated real-world probabilities."
+  },
+  "universe": {
+    "total_stocks": 100,
+    "prediction_ready_stocks": 90,
+    "limited_confidence_stocks": 10,
+    "normal_confidence_stocks": 90,
+    "limited_history_stocks": 8,
+    "limited_history_missing_feature_stocks": 2
+  },
+  "classification_rules": {
+    "opportunity_tiers": {
+      "High Opportunity": "Outperform ranks 1–18",
+      "Moderate Opportunity": "Outperform ranks 19–45",
+      "Low Opportunity": "Outperform ranks 46–90"
+    },
+    "fixed_downside_risk_bands": {
+      "Low Risk": "Probability below 0.40",
+      "Watch Risk": "Probability from 0.40 to below 0.47",
+      "High Risk": "Probability from 0.47 to below 0.51",
+      "Very High Risk": "Probability 0.51 or higher",
+      "usage": "Descriptive absolute-score alert only. Does not control the v2 combined class."
+    },
+    "downside_risk_quintiles": {
+      "Q1 — Highest Risk": "Ranks 1–18",
+      "Q2 — High Risk": "Ranks 19–36",
+      "Q3 — Medium Risk": "Ranks 37–54",
+      "Q4 — Lower Risk": "Ranks 55–72",
+      "Q5 — Lowest Risk": "Ranks 73–90"
+    },
+    "broad_relative_risk": {
+      "Higher Relative Risk": "Ranks 1–45",
+      "Lower Relative Risk": "Ranks 46–90",
+      "usage": "Controls the v2 combined opportunity-risk classification."
+    }
+  },
+  "snapshot_counts": {
+    "opportunity_tiers": {
+      "Low Opportunity": 45,
+      "Moderate Opportunity": 27,
+      "High Opportunity": 18,
+      "Limited Confidence": 10
+    },
+    "fixed_downside_risk_bands": {
+      "Very High Risk": 41,
+      "Watch Risk": 29,
+      "Low Risk": 21,
+      "High Risk": 9
+    },
+    "downside_risk_quintiles": {
+      "Q5 — Lowest Risk": 18,
+      "Q2 — High Risk": 18,
+      "Q1 — Highest Risk": 18,
+      "Q4 — Lower Risk": 18,
+      "Q3 — Medium Risk": 18,
+      "Limited Confidence": 10
+    },
+    "relative_downside_risk": {
+      "Lower Relative Risk": 45,
+      "Higher Relative Risk": 45,
+      "Limited Confidence": 10
+    },
+    "combined_classes": {
+      "Unfavourable Risk-Reward": 31,
+      "Balanced Opportunity": 21,
+      "Low Opportunity / Lower Risk": 14,
+      "Attractive Risk-Reward": 10,
+      "Limited Confidence - Review": 10,
+      "High Opportunity / High Risk": 8,
+      "Caution": 6
+    }
+  },
+  "v1_v2_comparison": {
+    "ready_stocks_compared": 90,
+    "unchanged_classifications": 85,
+    "changed_classifications": 5,
+    "changed_percentage": 5.5556,
+    "interpretation": "V2 preserved the original classification for 94.44% of prediction-ready stocks. Five stocks classified as lower fixed-band risk were in the riskier half of the current cross-section and were therefore moved to higher-risk combined classes.",
+    "changed_stocks": [
+      {
+        "symbol": "VBL",
+        "yf_ticker": "VBL.NS",
+        "company_name": "Varun Beverages Ltd.",
+        "outperform_probability": 0.4900548,
+        "outperform_rank": 37,
+        "opportunity_tier": "Moderate Opportunity",
+        "downside_probability": 0.46568026,
+        "downside_risk_rank": 41,
+        "fixed_downside_risk_band": "Watch Risk",
+        "downside_risk_quintile": "Q3 — Medium Risk",
+        "v1_class": "Balanced Opportunity",
+        "v2_class": "Caution"
+      },
+      {
+        "symbol": "GODREJCP",
+        "yf_ticker": "GODREJCP.NS",
+        "company_name": "Godrej Consumer Products Ltd.",
+        "outperform_probability": 0.48041976,
+        "outperform_rank": 55,
+        "opportunity_tier": "Low Opportunity",
+        "downside_probability": 0.46232655,
+        "downside_risk_rank": 42,
+        "fixed_downside_risk_band": "Watch Risk",
+        "downside_risk_quintile": "Q3 — Medium Risk",
+        "v1_class": "Low Opportunity / Lower Risk",
+        "v2_class": "Unfavourable Risk-Reward"
+      },
+      {
+        "symbol": "BAJFINANCE",
+        "yf_ticker": "BAJFINANCE.NS",
+        "company_name": "Bajaj Finance Ltd.",
+        "outperform_probability": 0.47201327,
+        "outperform_rank": 73,
+        "opportunity_tier": "Low Opportunity",
+        "downside_probability": 0.46157591,
+        "downside_risk_rank": 43,
+        "fixed_downside_risk_band": "Watch Risk",
+        "downside_risk_quintile": "Q3 — Medium Risk",
+        "v1_class": "Low Opportunity / Lower Risk",
+        "v2_class": "Unfavourable Risk-Reward"
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "yf_ticker": "KOTAKBANK.NS",
+        "company_name": "Kotak Mahindra Bank Ltd.",
+        "outperform_probability": 0.48034723,
+        "outperform_rank": 56,
+        "opportunity_tier": "Low Opportunity",
+        "downside_probability": 0.46040163,
+        "downside_risk_rank": 44,
+        "fixed_downside_risk_band": "Watch Risk",
+        "downside_risk_quintile": "Q3 — Medium Risk",
+        "v1_class": "Low Opportunity / Lower Risk",
+        "v2_class": "Unfavourable Risk-Reward"
+      },
+      {
+        "symbol": "BAJAJFINSV",
+        "yf_ticker": "BAJAJFINSV.NS",
+        "company_name": "Bajaj Finserv Ltd.",
+        "outperform_probability": 0.47021024,
+        "outperform_rank": 75,
+        "opportunity_tier": "Low Opportunity",
+        "downside_probability": 0.45648982,
+        "downside_risk_rank": 45,
+        "fixed_downside_risk_band": "Watch Risk",
+        "downside_risk_quintile": "Q3 — Medium Risk",
+        "v1_class": "Low Opportunity / Lower Risk",
+        "v2_class": "Unfavourable Risk-Reward"
+      }
+    ]
+  },
+  "historical_evidence_from_notebook_08": {
+    "evaluation_period": "2025 onward",
+    "common_months": 18,
+    "comparison": "Rank-based Attractive Risk-Reward minus Unfavourable Risk-Reward",
+    "future_return_difference_percentage_points": -0.02,
+    "future_return_95_ci": [
+      -2.25,
+      1.99
+    ],
+    "worst_path_difference_percentage_points": 1.84,
+    "worst_path_95_ci": [
+      0.73,
+      3.14
+    ],
+    "downside_5pct_rate_difference_percentage_points": -13.7,
+    "downside_5pct_rate_95_ci": [
+      -24.59,
+      -3.98
+    ],
+    "downside_10pct_rate_difference_percentage_points": -9.6,
+    "downside_10pct_rate_95_ci": [
+      -19.7,
+      -1.99
+    ],
+    "conclusion": "The rank-based combined classification showed statistically meaningful downside-risk separation but no statistically reliable final-return advantage."
+  },
+  "limitations": [
+    "The system is a risk-intelligence and screening framework, not a buy or sell recommendation.",
+    "The outperform model has not demonstrated a statistically conclusive return-alpha advantage.",
+    "Raw predict_proba outputs have not been fully calibrated as real-world probabilities.",
+    "The cleaner historical test contains only 18 monthly periods.",
+    "The historical signal test does not include transaction costs, slippage, turnover, liquidity, position sizing, or portfolio constraints.",
+    "Limited-confidence stocks receive model scores for reference but are excluded from normal-universe ranks."
+  ],
+  "output_files": {
+    "dated_snapshot_csv": "rank_based_prediction_snapshot_2026-07-14_v2.csv",
+    "dated_snapshot_parquet": "rank_based_prediction_snapshot_2026-07-14_v2.parquet",
+    "latest_snapshot_csv": "latest_rank_based_prediction_snapshot_v2.csv",
+    "latest_snapshot_parquet": "latest_rank_based_prediction_snapshot_v2.parquet",
+    "classification_audit_csv": "v1_v2_classification_audit_2026-07-14_v2.csv",
+    "classification_audit_parquet": "v1_v2_classification_audit_2026-07-14_v2.parquet",
+    "metadata_json": "rank_based_prediction_snapshot_metadata_2026-07-14_v2.json",
+    "summary_markdown": "rank_based_prediction_snapshot_summary_2026-07-14_v2.md"
+  }
+}
