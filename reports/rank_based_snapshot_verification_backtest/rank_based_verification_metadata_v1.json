@@ -1,0 +1,166 @@
+{
+  "notebook": "10_rank_based_snapshot_verification_backtest",
+  "notebook_version": "10",
+  "verification_version": "v1",
+  "classification_method": "rank_based_relative_downside_risk",
+  "generated_at_utc": "2026-07-24T00:45:47.626114+00:00",
+  "source_files": {
+    "feature_dataset": "data\\interim\\targets\\stock_features_with_targets_v1.parquet",
+    "outperform_model": "models\\best_random_forest_outperform_nifty50_20d_v1.joblib",
+    "downside_model": "models\\random_forest_downside_10pct_20d_v1.joblib",
+    "notebook_08_metadata": "reports\\historical_signal_backtest\\historical_signal_backtest_metadata_v1.json",
+    "notebook_09_metadata": "reports\\rank_based_prediction_snapshot\\rank_based_prediction_snapshot_metadata_2026-07-14_v2.json"
+  },
+  "model_configuration": {
+    "feature_count": 79,
+    "outperform_classes": [
+      0,
+      1
+    ],
+    "downside_classes": [
+      0,
+      1
+    ],
+    "identical_ordered_feature_list": true
+  },
+  "historical_sample": {
+    "start_date": "2024-01-02",
+    "end_date": "2026-06-01",
+    "rebalance_dates": 30,
+    "rows": 2700,
+    "stocks_per_rebalance": 90
+  },
+  "clean_test_period": {
+    "start_date": "2025-01-01",
+    "end_date": "2026-06-01",
+    "rebalance_dates": 18,
+    "rows": 1620
+  },
+  "bootstrap_configuration": {
+    "iterations": 10000,
+    "random_seed": 42,
+    "paired_months": 18,
+    "confidence_level": 0.95
+  },
+  "leakage_audit": {
+    "outcome_feature_overlap_count": 0,
+    "suspicious_feature_name_count": 0,
+    "feature_order_matches_fitted_models": true,
+    "direct_leakage_check_passed": true
+  },
+  "reference_reproduction": {
+    "combined_class_results_match_notebook_08": true,
+    "risk_quintile_results_match_notebook_08": true
+  },
+  "attractive_minus_unfavourable": {
+    "future_return": {
+      "difference_percentage_points": -0.02129932274536553,
+      "ci_95_lower": -2.254010708576599,
+      "ci_95_upper": 1.9898999476445207,
+      "ci_excludes_zero": false
+    },
+    "excess_return": {
+      "difference_percentage_points": -0.02448305922728276,
+      "ci_95_lower": -2.2591232661936314,
+      "ci_95_upper": 1.9888117706196387,
+      "ci_excludes_zero": false
+    },
+    "worst_path_return": {
+      "difference_percentage_points": 1.835645376292093,
+      "ci_95_lower": 0.7326524363217225,
+      "ci_95_upper": 3.143027350256654,
+      "ci_excludes_zero": true
+    },
+    "downside_5pct_rate": {
+      "difference_percentage_points": -13.702504267831483,
+      "ci_95_lower": -24.58559860405082,
+      "ci_95_upper": -3.982400124739996,
+      "ci_excludes_zero": true
+    },
+    "downside_10pct_rate": {
+      "difference_percentage_points": -9.604249632535417,
+      "ci_95_lower": -19.69646967029509,
+      "ci_95_upper": -1.9927826492006644,
+      "ci_excludes_zero": true
+    }
+  },
+  "q1_highest_minus_q5_lowest": {
+    "future_return": {
+      "difference_percentage_points": 1.3287703958414496,
+      "ci_95_lower": -0.7288620846720294,
+      "ci_95_upper": 3.463918711381919,
+      "ci_excludes_zero": false
+    },
+    "excess_return": {
+      "difference_percentage_points": 1.3366043463060397,
+      "ci_95_lower": -0.7194363751953623,
+      "ci_95_upper": 3.4726021532525944,
+      "ci_excludes_zero": false
+    },
+    "worst_path_return": {
+      "difference_percentage_points": -1.4497070499980669,
+      "ci_95_lower": -2.5471446445769756,
+      "ci_95_upper": -0.38867157988192036,
+      "ci_excludes_zero": true
+    },
+    "downside_5pct_rate": {
+      "difference_percentage_points": 13.580246913580252,
+      "ci_95_lower": 6.17283950617284,
+      "ci_95_upper": 22.530864197530867,
+      "ci_excludes_zero": true
+    },
+    "downside_10pct_rate": {
+      "difference_percentage_points": 8.333333333333332,
+      "ci_95_lower": 1.5432098765432103,
+      "ci_95_upper": 16.666666666666664,
+      "ci_excludes_zero": true
+    }
+  },
+  "method_stability": {
+    "risk_group_sizes": [
+      {
+        "method": "V1 fixed probability bands",
+        "risk_group": "Higher Fixed-Band Risk",
+        "mean_stocks": 29.8666666667,
+        "std_stocks": 23.4772703316,
+        "minimum_stocks": 1,
+        "maximum_stocks": 87
+      },
+      {
+        "method": "V1 fixed probability bands",
+        "risk_group": "Lower Fixed-Band Risk",
+        "mean_stocks": 60.1333333333,
+        "std_stocks": 23.4772703316,
+        "minimum_stocks": 3,
+        "maximum_stocks": 89
+      },
+      {
+        "method": "V2 relative ranks",
+        "risk_group": "Higher Relative Risk",
+        "mean_stocks": 45.0,
+        "std_stocks": 0.0,
+        "minimum_stocks": 45,
+        "maximum_stocks": 45
+      },
+      {
+        "method": "V2 relative ranks",
+        "risk_group": "Lower Relative Risk",
+        "mean_stocks": 45.0,
+        "std_stocks": 0.0,
+        "minimum_stocks": 45,
+        "maximum_stocks": 45
+      }
+    ],
+    "changed_stock_month_observations": 738,
+    "changed_rate_percent": 27.333333333333332,
+    "average_changes_per_month": 24.6,
+    "minimum_changes_per_month": 0,
+    "maximum_changes_per_month": 44
+  },
+  "final_interpretation": {
+    "validated_use": "relative downside-risk ranking and stock screening",
+    "not_validated_use": "reliable alpha, market-beating, or direct buy/sell prediction",
+    "recommended_primary_classification": "v2 rank-based relative downside risk",
+    "fixed_probability_bands_role": "descriptive alert levels only"
+  }
+}
