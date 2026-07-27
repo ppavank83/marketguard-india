@@ -1,0 +1,5 @@
+metric,observed_difference,bootstrap_mean_difference,ci_2_5_pct,ci_97_5_pct,ensemble_bootstrap_win_rate,ci_excludes_zero,better_direction
+roc_auc_difference_ensemble_minus_rf,0.005773869987786839,0.005221967716718474,-0.011748941280370231,0.023112837034915897,0.706,False,higher_is_better
+average_precision_difference_ensemble_minus_rf,0.0007152068471886208,0.0021658598128508305,-0.01497867434443377,0.022751673971250934,0.5715,False,higher_is_better
+log_loss_difference_ensemble_minus_rf,-0.0008378031280718012,-0.0007570629974101246,-0.003598313340497858,0.0016784447052963917,0.6985,False,lower_is_better
+brier_difference_ensemble_minus_rf,-0.0004164022378219945,-0.00037569696150646176,-0.0017876487599955116,0.0008334204203176869,0.6985,False,lower_is_better

@@ -1,0 +1,4 @@
+comparison,probability_correlation
+resnet_vs_random_forest,0.5045410150156822
+resnet_vs_mlp,0.7485988065029585
+resnet_vs_mlp_rf_ensemble,0.7224771256562541

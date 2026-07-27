@@ -1,0 +1,44 @@
+{
+  "generated_at_utc": "2026-07-26T00:58:37.666565+00:00",
+  "dataset_path": "E:\\Projects\\marketguard-india\\data\\interim\\targets\\stock_features_with_targets_v1.parquet",
+  "outperform_model_path": "E:\\Projects\\marketguard-india\\models\\best_random_forest_outperform_nifty50_20d_v1.joblib",
+  "downside_model_path": "E:\\Projects\\marketguard-india\\models\\random_forest_downside_10pct_20d_v1.joblib",
+  "modeling_rows": 307453,
+  "stock_count": 90,
+  "feature_count": 79,
+  "targets": {
+    "outperform": "target_outperform_nifty50_20d",
+    "downside": "target_big_downside_10pct_20d"
+  },
+  "legacy_split": {
+    "train_end_date": "2023-12-31",
+    "validation_start_date": "2024-01-01",
+    "validation_end_date": "2024-12-31",
+    "test_start_date": "2025-01-01"
+  },
+  "purge": {
+    "trading_days": 20,
+    "train_purge_start": "2023-12-01",
+    "train_purge_end": "2023-12-29",
+    "validation_purge_start": "2024-12-03",
+    "validation_purge_end": "2024-12-31",
+    "purged_rows": 3600
+  },
+  "audit": {
+    "duplicate_feature_count": 0,
+    "suspicious_feature_count": 0,
+    "non_numeric_feature_count": 0,
+    "features_with_missing_values": 1,
+    "total_infinite_values": 0,
+    "legacy_unassigned_rows": 0,
+    "purged_unassigned_rows": 3600,
+    "split_overlaps": {
+      "legacy_train_valid_overlap": 0,
+      "legacy_train_test_overlap": 0,
+      "legacy_valid_test_overlap": 0,
+      "purged_train_valid_overlap": 0,
+      "purged_train_test_overlap": 0,
+      "purged_valid_test_overlap": 0
+    }
+  }
+}
