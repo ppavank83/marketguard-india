@@ -252,3 +252,5 @@ Thumbs.db
 
 # Secrets
 .env
+# Local deep-learning research checkpoints
+models/deep_learning/

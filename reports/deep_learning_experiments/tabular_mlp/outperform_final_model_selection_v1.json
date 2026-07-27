@@ -1,0 +1,9 @@
+{
+  "target": "target_outperform_nifty50_20d",
+  "selected_candidate": "resnet_75_rf_25",
+  "resnet_weight": 0.75,
+  "random_forest_weight": 0.25,
+  "selection_split": "purged_validation",
+  "selection_reason": "Best overall validation ranking with reliably better calibration than ResNet alone.",
+  "test_used_for_selection": false
+}
