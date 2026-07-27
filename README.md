@@ -17,28 +17,23 @@ The goal is to support stock screening and risk analysis. It is not an automated
 
 ## Project Status
 
-**Work in progress**
+**Version 1 complete**
 
-Completed so far:
+Version 1 includes:
 
-- Historical market-data collection
-- Feature engineering
-- Random Forest model training
-- Historical backtesting
-- Rank-based classification design
-- Leakage checks
-- Production snapshot pipeline
-- Command-line interface
-- Unit tests
-- Reproducible Python environment
+- Historical market-data preparation
+- Feature engineering and 79 ordered model features
+- Two production Random Forest classifiers
+- Purged chronological validation
+- Deep-learning benchmark experiments
+- Bootstrap and moving-block-bootstrap comparisons
+- Rank-based opportunity and downside-risk classification
+- Reusable production snapshot code
+- Command-line snapshot generation
+- Unit tests and GitHub Actions CI
+- Reproducible Python environments
 
-Current work:
-
-- GitHub Actions CI
-- Deep learning model experiments
-- Production-only feature generation
-- Daily pipeline automation
-- API and dashboard development
+Automated data updates, a production-only feature pipeline, API, dashboard, deployment, and monitoring are possible later extensions rather than Version 1 requirements.
 
 ---
 
@@ -58,9 +53,9 @@ Stocks with insufficient history may still receive model probabilities, but they
 
 ---
 
-## Current Models
+## Final Production Models
 
-The current production baseline uses two Random Forest classification pipelines.
+Version 1 retains two Random Forest classification pipelines.
 
 ### Outperformance Model
 
@@ -204,6 +199,48 @@ Stocks ranked as higher risk experienced significantly more:
 The current opportunity model has not yet demonstrated statistically reliable excess-return separation.
 
 For that reason, MarketGuard is currently positioned mainly as a relative downside-risk and screening system.
+
+---
+
+## Deep-Learning Experiments
+
+The following tabular neural-network architectures were trained and evaluated:
+
+- Multilayer perceptron
+- Tabular residual network
+- FT-Transformer
+- TabNet
+- Random Forest and neural-network ensembles
+
+The experiments used chronological splits, training-only preprocessing, early stopping, class-imbalance handling, gradient safeguards, paired bootstrap analysis, and 20-trading-day moving-block bootstrap analysis.
+
+Some neural models improved validation metrics, but those gains were not stable across market periods and did not generalize to the later test period. No deep-learning model was promoted.
+
+Final chronological test results:
+
+| Target and retained model | ROC-AUC | Average precision | Log loss | Brier score |
+|---|---:|---:|---:|---:|
+| Outperformance Random Forest | 0.5141 | 0.5296 | 0.6940 | 0.2504 |
+| Downside-risk Random Forest | 0.6845 | 0.2056 | 0.5460 | 0.1840 |
+
+Final decision:
+
+```text
+Outperformance model: Random Forest retained
+Downside-risk model:  Random Forest retained
+```
+
+The opportunity model remains weak out of sample. The downside model is the more useful component and is intended primarily for relative risk screening.
+
+Experiment notebooks and reports are stored under:
+
+```text
+notebooks/11_deep_learning_data_audit.ipynb
+notebooks/12_tabular_mlp_baseline.ipynb
+reports/deep_learning_experiments/
+```
+
+Regenerable neural-network checkpoints are excluded from Git.
 
 ---
 
@@ -423,7 +460,7 @@ models/best_random_forest_outperform_nifty50_20d_v1.joblib
 models/random_forest_downside_10pct_20d_v1.joblib
 ```
 
-Large datasets and trained model files may be excluded from Git.
+The two final Random Forest model artifacts are versioned in Git. Large historical datasets and regenerable deep-learning checkpoints remain local.
 
 The current prediction pipeline uses only the 79 ordered model features during inference. Future target columns are not passed to the models.
 
@@ -431,217 +468,39 @@ A dedicated production-only feature pipeline will later remove the dependency on
 
 ---
 
-## Work in Progress
+## Version 1 Scope
 
-### GitHub Actions CI
+Version 1 is complete as a local, reproducible machine-learning research and inference project.
 
-GitHub Actions will be added to automatically:
+The following are intentionally outside the Version 1 scope:
 
-- Install Python 3.12
-- Install project dependencies
-- Compile production modules
-- Run the test suite
-- Show pass or fail checks on pull requests
-
-### Deep Learning Experiments
-
-Deep learning models will be tested against the existing Random Forest baseline.
-
-Planned experiments include:
-
-- Multilayer perceptron
-- Residual MLP
-- Tabular Transformer
-- LSTM
-- GRU
-- Temporal convolutional network
-- Sequence Transformer
-- Random Forest and neural-network ensembles
-
-Deep learning models will use strict chronological train, validation, and test periods.
-
-A deep learning model will only replace the current production model when it shows a meaningful and stable improvement on untouched historical data.
-
-### Production Feature Pipeline
-
-A dedicated production feature pipeline will:
-
-- Download or update market data
-- Build features using only current and past information
-- Produce the expected model columns
-- Validate data freshness
-- Validate feature completeness
-- Avoid future target columns
-- Generate the latest feature snapshot
-
-### Daily End-to-End Pipeline
-
-The complete daily workflow will eventually be:
-
-```text
-Market-data update
-        ↓
-Production feature generation
-        ↓
-Model scoring
-        ↓
-Relative ranking
-        ↓
-Opportunity-risk classification
-        ↓
-Historical snapshot storage
-        ↓
-API and dashboard update
-```
-
----
-
-## Future Plan
-
-### Near-Term Development
-
-1. Add GitHub Actions CI
-2. Preserve the current Random Forest benchmark
-3. Build deep learning training datasets
-4. Train MLP models
-5. Test sequence models
-6. Compare Random Forest and deep learning
-7. Test model ensembles
-8. Select the final production model
-9. Build production-only feature generation
-10. Build a one-command daily pipeline
-11. Expand unit and integration tests
-
-### Application Development
-
-Planned application work includes:
-
-- Historical snapshot storage
-- FastAPI backend
+- Automated daily market-data downloads
+- Production-only feature generation
+- Scheduled end-to-end execution
+- FastAPI service
 - Streamlit dashboard
-- Market overview page
-- Opportunity screener
-- Downside-risk screener
-- Stock detail pages
-- Rank history
-- Classification history
-- Data-confidence indicators
-- Model methodology page
+- Cloud deployment
+- Database-backed historical snapshots
+- Alerts and watchlists
+- Portfolio-risk analysis
+- Automated retraining and drift monitoring
 
-### Explainability
-
-Planned model explanations include:
-
-- Important features behind each prediction
-- Volatility context
-- Momentum context
-- Moving-average context
-- Sector-relative strength
-- Market-relative strength
-- SHAP or permutation-based explanations
-
-### Alerts and Watchlists
-
-Planned alert conditions include:
-
-- Stock enters Attractive Risk-Reward
-- Stock enters High Opportunity / High Risk
-- Stock moves into Q1 Highest Risk
-- Downside probability crosses a warning level
-- Opportunity rank changes significantly
-- Classification changes
-- Data confidence becomes limited
-
-### Portfolio-Risk Module
-
-Planned portfolio features include:
-
-- Portfolio-weighted downside risk
-- Sector concentration
-- High-risk position exposure
-- Correlated risk groups
-- Position-size guidance
-- Portfolio classification summary
-
-### Deployment
-
-Planned deployment work includes:
-
-- Docker containerization
-- FastAPI deployment
-- Streamlit deployment
-- Azure Container Apps or App Service
-- Azure SQL or PostgreSQL
-- Azure Blob Storage
-- Scheduled end-of-day jobs
-- Application logging
-- Failure notifications
-- Health monitoring
-
-### Model Monitoring
-
-Planned monitoring includes:
-
-- Missing-stock detection
-- Stale-price detection
-- Missing-feature rates
-- Feature drift
-- Probability drift
-- Classification drift
-- Rank stability
-- Realized 20-day outcomes
-- Downside-event tracking
-- Model-version tracking
-
-### Retraining
-
-Future retraining will use a controlled process:
-
-1. Create a new training dataset
-2. Preserve chronological splits
-3. Train candidate models
-4. Compare against the production model
-5. Run historical snapshot backtests
-6. Test calibration
-7. Check risk separation
-8. Promote only approved models
-9. Preserve old model versions
+These are possible later enhancements, not requirements for the completed portfolio project.
 
 ---
 
-## Planned API
+## Future Enhancements
 
-Possible future API endpoints include:
+Potential later work includes:
 
-```text
-GET /health
-GET /snapshot/latest
-GET /snapshot/{date}
-GET /stocks/{symbol}
-GET /stocks/{symbol}/history
-GET /rankings/opportunity
-GET /rankings/downside-risk
-GET /classifications/{class_name}
-```
-
----
-
-## Planned Dashboard
-
-The dashboard is expected to include:
-
-- Latest snapshot date
-- Prediction-ready stock count
-- Data-confidence summary
-- Opportunity-tier distribution
-- Downside-risk distribution
-- Combined classification distribution
-- NIFTY 100 stock screener
-- Stock-level probabilities
-- Opportunity and risk ranks
-- Historical classification changes
-- Price and feature context
-- Methodology and limitations
+- A point-in-time stock universe to reduce survivorship bias
+- A production-only feature pipeline
+- Walk-forward model evaluation
+- Daily rank-IC and portfolio-bucket analysis
+- Transaction-cost and turnover analysis
+- API and dashboard interfaces
+- Model explanations and monitoring
+- Scheduled cloud execution
 
 ---
 
